@@ -3,7 +3,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.mulesoft.training</groupId>
-	<artifactId>maven-project</artifactId>
+	<artifactId>maven-project-ben</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>mule</packaging>
 	<name>Mule maven-project Application</name>
@@ -17,6 +17,9 @@
     	
     	<derby.version>10.13.1.1</derby.version>
     	<activemq.version>5.15.0</activemq.version>
+    	
+    	<uid>bbarnard_july2017</uid>
+    	<pwd>notMyPassword</pwd>
 	</properties>
 
 	<build>
@@ -30,6 +33,29 @@
                     <copyToAppsDirectory>true</copyToAppsDirectory>
 				</configuration>
 			</plugin>
+			<plugin>
+    <groupId>org.mule.tools.maven</groupId>
+    <artifactId>mule-maven-plugin</artifactId>
+    <version>2.0</version>
+    <configuration>
+        <deploymentType>cloudhub</deploymentType>
+        <muleVersion>${mule.version}</muleVersion>
+        <username>${uid}</username>
+        <password>${pwd}</password>
+	 <workerType>Micro</workerType>
+        <redeploy>true</redeploy>
+        <environment>Sandbox</environment>
+    </configuration>
+    <executions>
+        <execution>
+            <id>deploy</id>
+            <phase>deploy</phase>
+            <goals>
+                <goal>deploy</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
